@@ -1,0 +1,13 @@
+<%= render 'shared/title', title: 'New post' %>
+
+<div class='well'>
+  <%= form_for :post do |f| %>
+  <%= label_tag 'title', 'Title' %>
+  <%= f.text_field :title %> <br />
+  <%= label_tag 'url', 'URL' %>
+  <%= f.text_field :url %> <br />
+  <%= label_tag 'description', 'Description' %>
+  <%= f.text_area :description, rows: 5 %> <br />
+  <%= f.submit 'Create Post', class: 'btn btn-primary' %>
+  <% end %>
+</div>
