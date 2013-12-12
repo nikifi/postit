@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   def show
     
     @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
 
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
       flash[:notice] = "Your post was created."
       redirect_to posts_path
     else
+      flash[:error] = "Your post was not saved"
       render :new
     end
   end

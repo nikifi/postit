@@ -1,13 +1,18 @@
 <%= render @post.categories %>
-
 <%= render 'shared/title', title: @post.title %>
-
-<p> <%= @post.url %> </p>
-
-<p>
-<%= @post.description %> 
-</p>
 <p class = "small">
 <%= link_to "[edit post]", edit_post_path %>
 <%= link_to "[create new post]", new_post_path %>
 </p>
+<p> <%= @post.url %> </p>
+<p>
+<%= @post.description %> 
+</p>
+
+<div class = "row">
+  <%= form_for [@post, @comment] do |f| %>
+     <%= f.label 'Comment' %>
+     <%= f.text_area :body, rows: 5 %> <br />
+  <%= f.submit 'Submit Comment', class: 'btn btn-primary'  %>
+  <% end %>
+</div>

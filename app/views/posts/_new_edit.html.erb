@@ -1,3 +1,5 @@
+<%= render 'shared/errors', obj: @post %>
+
 <div class='well'>
   <%= form_for @post do |f| %>
   <%= label_tag 'title', 'Title' %>
@@ -6,6 +8,6 @@
   <%= f.text_field :url %> <br />
   <%= label_tag 'description', 'Description' %>
   <%= f.text_area :description, rows: 5 %> <br />
-  <%= f.submit (@post.new_record? ? 'Create Post' : 'Edit Post', class: 'btn btn-primary') %>
+  <%= f.submit @post.new_record? ? 'Create Post' : 'Edit Post', class: 'btn btn-primary'  %>
   <% end %>
 </div>
