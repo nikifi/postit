@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+   before_action :require_user
   def new
 
     @category = Category.new
@@ -18,6 +19,8 @@ class CategoriesController < ApplicationController
   def show
 
   end
+
+  private
 
   def category_params
     params.require(:category).permit(:name)

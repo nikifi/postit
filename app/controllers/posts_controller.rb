@@ -1,24 +1,26 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :vote]
+  before_action :require_user, except: [:index, :show]
+
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by { |x| x.total_votes}.reverse
 
   end
 
-  def show
-    
-    @post = Post.find(params[:id])
+  def show  
     @comment = Comment.new
   end
 
 
   def new
-    @post = Post.new
-    
+    @post = Post.new  
   end
 
   def create
+
+  
     @post = Post.new(post_params)
-    @post.creator = User.first
+    @post.creator = current_user
     if @post.save
       flash[:notice] = "Your post was created."
       redirect_to posts_path
@@ -30,11 +32,11 @@ class PostsController < ApplicationController
 
 
   def edit
-    @post = Post.find(params[:id])
+    
   end
 
   def update
-     @post = Post.find(params[:id])
+     #binding.pry
     if @post.update(post_params)
       flash[:notice] = "Your post was updated"
       redirect_to post_path(@post)
@@ -44,7 +46,21 @@ class PostsController < ApplicationController
 
   end
 
+  def vote
+    
+    Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    flash[:notice] = "Your count has been counted"
+    redirect_to :back
+
+  end
+
+  private
+
   def post_params
-    params.require(:post).permit(:title, :url, :description)
+    params.require(:post).permit(:title, :url, :description, category_ids: [])
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end

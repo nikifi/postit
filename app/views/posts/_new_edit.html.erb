@@ -8,6 +8,11 @@
   <%= f.text_field :url %> <br />
   <%= label_tag 'description', 'Description' %>
   <%= f.text_area :description, rows: 5 %> <br />
+  <%= f.label "Categories" %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+  <% cb.label(class: "checkbox inline") {cb.check_box(class: "checkbox") + cb.text} %>
+  <%end %>
+
   <%= f.submit @post.new_record? ? 'Create Post' : 'Edit Post', class: 'btn btn-primary'  %>
   <% end %>
 </div>

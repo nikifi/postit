@@ -1,0 +1,16 @@
+<%= render 'shared/title', title: 'Sign up as a New User' %>
+<%= render 'shared/errors', obj: @user %>
+
+
+<%= form_for @user do |f| %>
+<%= label_tag 'username', 'Enter Username' %>
+<%= f.text_field :username %>
+<%= label_tag 'password', 'Enter Password' %>
+<%= f.password_field :password %>
+<br />
+<%= f.submit 'Create Account', class: 'btn btn-primary'%>
+  <% end %>
+
+
+
+

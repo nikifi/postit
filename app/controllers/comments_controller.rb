@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
+  before_action :require_user
 
   def create
 
     @comment = Comment.new(comment_params)
-    @comment.user = User.first
+    @comment.user_id = current_user.id
     @post = Post.find(params[:post_id])
     @comment.post = Post.find(params[:post_id])
 
@@ -15,6 +16,16 @@ class CommentsController < ApplicationController
     end
 
   end
+
+  def vote
+   
+    @comment= Comment.find(params[:id])
+    Vote.create(voteable: @comment, creator: current_user, vote: params[:vote])
+    flash[:notice] = "Your vote has been recorded"
+    redirect_to :back
+  end
+  
+  private
 
   def comment_params
 

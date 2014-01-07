@@ -1,8 +1,24 @@
+  <%if logged_in?%>
+<p> Welcome <%= current_user.username %>
+<%end%>
 <%= render 'shared/title', title: 'All Posts' %>
+<% if logged_in? %>
 <p> <span class ="small"> <%= link_to "[create new post]", new_post_path %> </span></p>
-
+<% end%>
 <% @posts.each do |post| %>
+
   <div class="row">
+    <div class="span0 well">
+      <%= link_to vote_post_path(post, vote: true), method: :post do %>
+        <i class="icon-arrow-up"></i>
+      <%end%>
+      <br/>
+      <span> <%= post.total_votes %> votes</span>
+      <br/>
+       <%= link_to vote_post_path(post, vote: false), method: :post do %>
+        <i class="icon-arrow-down"></i>
+      <%end%>
+    </div>
     <div class="span8 well">
     <%= render post.categories %>
 
@@ -12,7 +28,7 @@
         <span class="quiet">posted by 
           <%=post.creator.username if post.creator %>     
         </span>
-        <small>Created at: <%= post.created_at %> </small>
+        <small>Created at: <%= display_datetime(post.created_at) if post.created_at  %> </small>
       </p>
       <span>
         <%= link_to("#{post.comments.size} comments", post_path(post)) %>
