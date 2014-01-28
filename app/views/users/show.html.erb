@@ -1,0 +1,14 @@
+<%= render 'shared/title', title: 'Profile' %>
+
+<div class="well">
+<b>Username: &nbsp; &nbsp; </b> <%= @user.username%>
+
+</div>
+
+<%= @user.username %>'s Activity
+<br>
+<%= @userpost.all.each do |upost| %>
+<div class = "well">
+<%= upost.title%>
+</div>
+<% end %>

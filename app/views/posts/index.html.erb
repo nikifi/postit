@@ -10,13 +10,17 @@
   <div class="row">
     <div class="span0 well">
       <%= link_to vote_post_path(post, vote: true), method: :post do %>
-        <i class="icon-arrow-up"></i>
-      <%end%>
+      <% if logged_in? %>
+          <i class="icon-arrow-up"></i>
+          <%end%>
+       <%end%>
       <br/>
       <span> <%= post.total_votes %> votes</span>
       <br/>
        <%= link_to vote_post_path(post, vote: false), method: :post do %>
-        <i class="icon-arrow-down"></i>
+       <% if logged_in? %>
+          <i class="icon-arrow-down"></i>
+        <%end%>
       <%end%>
     </div>
     <div class="span8 well">

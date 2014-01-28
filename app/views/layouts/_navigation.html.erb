@@ -5,9 +5,15 @@
   <li>
     <%= link_to 'Categories', new_category_path %>
   </li>
-  <li>
-    <%= link_to 'Register', '/register' %>
-  </li>
+  <% if logged_in? %>
+     <li>
+      <%= link_to current_user.username, user_path(current_user.id) %>
+    </li>
+   <%else%>
+    <li>
+      <%= link_to 'Register', '/register' %>
+    </li>
+  <%end%>
 
   <% if logged_in? %>
   <li>

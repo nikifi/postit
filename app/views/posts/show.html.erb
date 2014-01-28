@@ -30,16 +30,21 @@
  
     
     <div class="row">
-      <div class="well span0">
-      <%= link_to vote_post_comment_path(@post, msg, vote: true), method: :post do %>
-      <i class = "icon-arrow-up"></i>
-      <%end %>
-      <br/>
-      <%=link_to vote_post_comment_path(@post, msg, vote: false), method: :post do %>
-      <i class="icon-arrow-down"></i>
-      <%end%>
-    </div>
-  <div class = "well span6">
+          <div class="well span0 text-center">
+          <%= link_to vote_post_comment_path(@post, msg, vote: true), method: :post do %>
+          <% if logged_in? %>
+          <i class = "icon-arrow-up"></i>
+          <%end %>
+          <br/>
+        <%end%>
+        <%= msg.total_votes %> votes
+          <%=link_to vote_post_comment_path(@post, msg, vote: false), method: :post do %>
+          <% if logged_in? %>
+          <i class="icon-arrow-down"></i>
+          <%end%>
+      </div>
+    <%end%>
+  <div class = "well span4">
     <%= msg.body%>
     by <%= msg.user.username if msg.user%>
   </div>

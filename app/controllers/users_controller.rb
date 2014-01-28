@@ -18,6 +18,16 @@ class UsersController < ApplicationController
 
   end
 
+  def show
+    #binding.pry
+
+    #@user = User.find_by(username: current_user.username)
+    #@userid = User.find_by(id: current_user.id)
+    @user = current_user
+    @userpost = Post.where("user_id = ?", current_user.id)
+
+  end
+
   def user_params
     params.require(:user).permit(:username, :password)
 
